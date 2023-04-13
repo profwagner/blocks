@@ -18,13 +18,18 @@ def display_board(b):
 x = 3
 y = 4
 rotation = 0
-piece = (((-1,0),(0,0),(0,-1),(1,0)),((0,0),(0,-1),(0,1),(1,0)))
-
+piece = ( ((-1,0),(0,0),(0,-1),(1,0)),((0,0),(0,-1),(0,1),(1,0)) )
+# ((spots in 1st roation),(spots in 2nd rotation))
 shape=piece[0]
-def rotate(x, y, b, piece, rot):
+
+def check_roate (x, y, b, shape):
     pass
-    rot += 1
-    rot %= len(piece)
+
+def rotate(x, y, b, piece, rot):
+    nrot += 1
+    nrot %= len(piece) #if we have reached end of list go back to first rotation
+    shape = piece[nrot]
+    
     #need to see if it fits
     #need to return new roation
 for spot in shape:
@@ -44,21 +49,21 @@ def check_move (x, y, b, shape):
     return True
     
 def move_right(x, y, b, shape):
-    cx = x + 1
+    cx = x + 1 #find new position
     cy = y
     if check_move(cx,cy, b, shape): #If space to right empty move right
         for spot in shape:
             nx = x + spot[0]
             ny = y + spot[1]
             b[ny][nx]=' ' #erase piece from old location
-        x += 1
+        x += 1 #actally update new position
         for spot in shape:
             nx = x + spot[0]
             ny = y + spot[1]
             b[ny][nx]='%' #draw piece in new location
         b[y][x] = '*' #mark center location
         
-    return x
+    return x #return new x value
 
 
 
