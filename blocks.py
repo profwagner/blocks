@@ -19,28 +19,13 @@ x = 3
 y = 4
 rotation = 0
 piece = ( ((-1,0),(0,0),(0,-1),(1,0)),((0,0),(0,-1),(0,1),(1,0)) )
+# ((spots in 1st roation),(spots in 2nd rotation))
 mp_piece = ( ( (0,0),(0,-1),(0,1),(1,1) ), ( (0,0),(-1,0),(1,0),(1,-1) ), ( (0,0),(0,1),(0,-1),(-1,-1) ), ( (0,0),(-1,1),(-1,0),(1,0) ) ) 
 
-# ((spots in 1st roation),(spots in 2nd rotation))
 shape=piece[0]
 
-def check_roate (x, y, b, shape):
-    pass
-
-def rotate(x, y, b, piece, rot):
-    nrot += 1
-    nrot %= len(piece) #if we have reached end of list go back to first rotation
-    shape = piece[nrot]
-    
-    #need to see if it fits
-    #need to return new roation
-for spot in shape:
-            nx = x + spot[0]
-            ny = y + spot[1]
-            board[ny][nx]='%' #draw 1st piece
-board[y][x] = '*' #mark center location
-display_board(board)
-
+#def check_roate (x, y, b, shape):
+#    pass
 def check_move (x, y, b, shape):
     #can the piece be moved to have its center at x, y?
     for spot in shape:
@@ -49,6 +34,28 @@ def check_move (x, y, b, shape):
         if b[ny][nx] == '#': #spot is filled
             return False
     return True
+
+def rotate(x, y, b, piece, rot):
+    nrot = rot + 1
+    nrot %= len(piece) #if we have reached end of list go back to first rotation
+    shape = piece[nrot]
+    #need to see if it fits
+    if check_move (x, y, b, shape):
+        print ('can rotate')
+        rot = nrot
+    else:
+        print ("can't rotate")
+    return rot
+        
+    
+    #need to return new roation
+for spot in shape:
+            nx = x + spot[0]
+            ny = y + spot[1]
+            board[ny][nx]='%' #draw 1st piece
+board[y][x] = '*' #mark center location
+display_board(board)
+
     
 def move_right(x, y, b, shape):
     cx = x + 1 #find new position
