@@ -1,11 +1,18 @@
 #need to finish
-#8 wide 10 tall
-row = ['#',' ',' ',' ',' ',' ',' ','#']
-bot = ['#','#','#','#','#','#','#','#']
+
 
 board = []
-for r in range(9):
+cols = 10
+rows = 20
+
+row = ['#']
+for i in range(cols):
+    row.append(' ')
+row.append('#')
+
+for r in range(rows):
     board.append(row.copy())
+bot =['#' for c in range(cols+2)]
 board.append(bot)
 
 def display_board(b):
@@ -73,7 +80,3 @@ def move_right(x, y, b, shape):
         b[y][x] = '*' #mark center location
         
     return x #return new x value
-
-
-
-        
